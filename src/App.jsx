@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import supabase from './supabase';
 
 import './App.css';
 import Header from './components/Header';
@@ -9,6 +10,14 @@ import Loader from './components/Loader';
 const App = () => {
   const [currentCategory, setCurrentCategory] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
+
+  // Fetch facts data from the supabase
+  useEffect(() => {
+    const getFacts = async () => {
+      const { data: facts, error } = await supabase.from('facts').select('*');
+    };
+    getFacts();
+  }, [currentCategory]);
 
   return (
     <>
