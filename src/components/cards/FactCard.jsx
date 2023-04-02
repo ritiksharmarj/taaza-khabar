@@ -5,7 +5,7 @@ const FactCard = ({ fact }) => {
     fact.votesInteresting + fact.votesMindblowing < fact.votesFalse;
 
   return (
-    <li className='flex flex-col xl:flex-row items-start xl:items-center gap-3 xl:gap-6 text-lg leading-6 bg-stone-700 mb-4 px-6 py-4 -tracking-[1px] rounded-2xl'>
+    <li className='flex flex-col xl:flex-row items-start xl:items-center gap-3 xl:gap-6 text-lg leading-6 bg-stone-700 mb-4 sm:px-6 px-4 py-4 -tracking-[1px] rounded-2xl'>
       <p>
         {isDisputed ? (
           <span className='font-semibold mr-3 text-red-500'>

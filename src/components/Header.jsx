@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 import favicon from '/favicon.svg';
 
-const Header = () => {
+const Header = ({ showForm, setShowForm }) => {
   return (
     <header className='absolute w-full z-50'>
       <div className='mx-auto max-w-[1440px] w-full xl:px-8'>
@@ -21,8 +21,11 @@ const Header = () => {
             />
           </Link>
 
-          <button className='btn-gradient font-coiny leading-none uppercase text-lg sm:px-8 sm:pt-5 sm:pb-[17px] px-3 pt-2 pb-3 rounded-full transition-all duration-300 sm:hover:scale-110 hover:-rotate-2 hover:scale-105'>
-            Share a fact
+          <button
+            onClick={() => setShowForm((show) => !show)}
+            className='btn-gradient font-coiny !leading-none uppercase text-lg sm:px-8 sm:pt-5 sm:pb-[17px] px-3 pt-2 pb-3 rounded-full transition-all duration-300 sm:hover:scale-110 hover:-rotate-2 hover:scale-105'
+          >
+            {showForm ? 'Close' : 'Share a fact'}
           </button>
         </div>
       </div>
