@@ -1,7 +1,6 @@
-import { initialFacts as facts } from '../utils/config';
 import FactCard from './cards/FactCard';
 
-const FactList = () => {
+const FactList = ({ facts }) => {
   // If there is no fact
   if (facts.length === 0)
     return (

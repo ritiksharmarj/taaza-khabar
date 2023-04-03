@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CATEGORIES } from '../utils/config';
 
-const NewFactForm = ({ setShowForm }) => {
+const NewFactForm = ({ setShowForm, setFacts }) => {
   const [text, setText] = useState('');
   const [source, setSource] = useState('');
   const [category, setCategory] = useState('');
@@ -12,12 +12,31 @@ const NewFactForm = ({ setShowForm }) => {
     e.preventDefault();
 
     // 2. Check if data is valid. If so, create a new fact
-    // 3. Create a new fact object
-    // 3. Upload fact to Supabase and receive the new fact object
-    // 4. Add the new fact to the UI: add the fact to state
-    // 5. Reset input fields
-    // 6. Close the form
-    setShowForm(false);
+    if (text && source && category && textLength <= 200) {
+      // 3. Create a new fact object
+      const newFact = {
+        id: Math.round(Math.random() * 10000000),
+        text,
+        source,
+        category,
+        votesInteresting: 0,
+        votesMindblowing: 0,
+        votesFalse: 0,
+        createdIn: new Date().getFullYear(),
+      };
+
+      // 3. Upload fact to Supabase and receive the new fact object
+      // 4. Add the new fact to the UI: add the fact to state
+      setFacts((facts) => [newFact, ...facts]);
+
+      // 5. Reset input fields
+      setText('');
+      setSource('');
+      setCategory('');
+
+      // 6. Close the form
+      setShowForm(false);
+    }
   };
 
   return (
@@ -42,7 +61,7 @@ const NewFactForm = ({ setShowForm }) => {
 
       <input
         required
-        type='text'
+        type='url'
         placeholder='Trustworthy source...'
         value={source}
         onChange={(e) => setSource(e.target.value)}
