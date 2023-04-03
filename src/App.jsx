@@ -21,9 +21,12 @@ const App = () => {
       setIsLoading(true);
 
       // 2. Fetching facts data from supabase asynchronously
-      const { data: facts, error } = await supabase
-        .from('facts')
-        .select('*')
+      let query = supabase.from('facts').select('*');
+
+      if (currentCategory !== 'all')
+        query = query.eq('category', currentCategory);
+
+      const { data: facts, error } = await query
         .order('votesInteresting', { ascending: false }) // order facts by 'interesting votes' from high to low
         .limit(1000); // limit the facts to 1000 if there are more than that then we'll implement pagination
 
@@ -35,7 +38,7 @@ const App = () => {
       setIsLoading(false);
     };
     getFacts();
-  }, []);
+  }, [currentCategory]);
 
   return (
     <>
