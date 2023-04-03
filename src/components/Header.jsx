@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import logo from '../assets/logo.svg';
-import favicon from '/favicon.svg';
+import logoMob from '../assets/logo-mob.svg';
 
 const Header = ({ showForm, setShowForm }) => {
   return (
@@ -12,10 +12,10 @@ const Header = ({ showForm, setShowForm }) => {
             <img
               src={logo}
               alt='taaza-khabar'
-              className='sm:h-12 h-10 hidden sm:block'
+              className='sm:h-14 h-10 hidden sm:block'
             />
             <img
-              src={favicon}
+              src={logoMob}
               alt='taaza-khabar'
               className='sm:h-12 h-10 block sm:hidden'
             />

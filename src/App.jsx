@@ -45,7 +45,7 @@ const App = () => {
       <Header showForm={showForm} setShowForm={setShowForm} />
 
       <main className='mx-auto max-w-[1440px]'>
-        <div className='px-4 sm:px-6 lg:px-8 sm:h-screen h-auto pt-28'>
+        <div className='px-4 sm:px-6 lg:px-8 pt-28 sm:h-screen h-auto'>
           {/* New Fact Form */}
           {showForm ? (
             <NewFactForm setShowForm={setShowForm} setFacts={setFacts} />
