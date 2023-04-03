@@ -1,6 +1,6 @@
 import FactCard from './cards/FactCard';
 
-const FactList = ({ facts }) => {
+const FactList = ({ facts, setFacts }) => {
   // If there is no fact
   if (facts.length === 0)
     return (
@@ -14,7 +14,7 @@ const FactList = ({ facts }) => {
     <div>
       <ul>
         {facts.map((fact) => (
-          <FactCard key={fact.id} fact={fact} />
+          <FactCard key={fact.id} fact={fact} setFacts={setFacts} />
         ))}
       </ul>
       <p>There are {facts.length} facts in the Taaza Khabar. Add your own!</p>

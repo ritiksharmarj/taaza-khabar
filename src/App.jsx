@@ -54,7 +54,11 @@ const App = () => {
           <div className='grid sm:grid-cols-[250px_minmax(0,_1fr)] grid-cols-1 sm:gap-12 gap-6 pb-10'>
             <CategoryFilter setCurrentCategory={setCurrentCategory} />
 
-            {isLoading ? <Loader /> : <FactList facts={facts} />}
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <FactList facts={facts} setFacts={setFacts} />
+            )}
           </div>
         </div>
       </main>
