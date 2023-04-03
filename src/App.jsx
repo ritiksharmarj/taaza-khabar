@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import supabase from './supabase';
 
 import './App.css';
 import Header from './components/Header';
@@ -7,6 +6,7 @@ import CategoryFilter from './components/CategoryFilter';
 import FactList from './components/FactList';
 import Loader from './components/Loader';
 import NewFactForm from './components/NewFactForm';
+import supabase from './supabase';
 
 const App = () => {
   const [showForm, setShowForm] = useState(false);
@@ -17,8 +17,22 @@ const App = () => {
   // Fetch facts data from the supabase
   useEffect(() => {
     const getFacts = async () => {
-      const { data: facts, error } = await supabase.from('facts').select('*');
-      setFacts(facts);
+      // 1. Loader until facts data fetched
+      setIsLoading(true);
+
+      // 2. Fetching facts data from supabase asynchronously
+      const { data: facts, error } = await supabase
+        .from('facts')
+        .select('*')
+        .order('votesInteresting', { ascending: false }) // order facts by 'interesting votes' from high to low
+        .limit(1000); // limit the facts to 1000 if there are more than that then we'll implement pagination
+
+      // 3. Handle error
+      if (!error) setFacts(facts);
+      else alert('There was a problem getting data');
+
+      // 4. Set Loader back to 'false' because facts data have fetched
+      setIsLoading(false);
     };
     getFacts();
   }, []);
@@ -27,14 +41,14 @@ const App = () => {
     <>
       <Header showForm={showForm} setShowForm={setShowForm} />
 
-      <main className='mx-auto max-w-[1440px] overflow-hidden'>
-        <div className='px-4 sm:px-6 lg:px-8 sm:h-screen h-auto pt-28 pb-10'>
+      <main className='mx-auto max-w-[1440px]'>
+        <div className='px-4 sm:px-6 lg:px-8 sm:h-screen h-auto pt-28'>
           {/* New Fact Form */}
           {showForm ? (
             <NewFactForm setShowForm={setShowForm} setFacts={setFacts} />
           ) : null}
 
-          <div className='grid sm:grid-cols-[250px_minmax(0,_1fr)] grid-cols-1 sm:gap-12 gap-6'>
+          <div className='grid sm:grid-cols-[250px_minmax(0,_1fr)] grid-cols-1 sm:gap-12 gap-6 pb-10'>
             <CategoryFilter setCurrentCategory={setCurrentCategory} />
 
             {isLoading ? <Loader /> : <FactList facts={facts} />}

@@ -5,7 +5,7 @@ const FactList = ({ facts }) => {
   if (facts.length === 0)
     return (
       <p className='text-center uppercase sm:text-3xl text-xl font-semibold mt-6'>
-        No facts for this category yet! Create the first one ✌️
+        No facts till yet! Create the first one ✌️
       </p>
     );
 
