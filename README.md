@@ -1,6 +1,6 @@
 # Taaza Khabar
 
-Trending News At Your Fingertips
+Trending Facts At Your Fingertips
 
 Check here at [Taaza Khabar &rarr;](https://taaza-khabar.vercel.app/)
 
